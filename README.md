@@ -38,11 +38,11 @@ Install the following:
 1. Replace the current `package.json` file's `scripts` section with the following script entries:
 
     ```bash
-    "start-api": "cd api & func host start",
+    "start-api": "cd api & npm start",
     "start-app": "cd app & npm start",
     "start-dev": "concurrently \"npm:start-api\" \"npm:start-app\" ",
-    "swa-up": "swa start http://localhost:3000 --api http://localhost:7071",
-    "start": " npm run start-dev &  npm run swa-up "
+    "start-swa": "swa start http://localhost:3000 --api http://localhost:7071",
+    "start": " npm run start-dev && npm run swa-up"
     ```
 
 
@@ -68,11 +68,27 @@ Install the following:
     func init api --worker-runtime node --language typescript
     ```
 
+1. Create http trigger API:
+
+    ```bash 
+    func new --name HttpHello --worker-runtime node --template "HTTP trigger" --language TypeScript --authlevel anonymous
+    ```
+
 1. Install dependencies:
 
     ```bash
     cd api && npm install && cd ..
     ```
+
+## Start local development servers
+
+The React client and the Azure Function API have separate local development servers. 1. In order to debug both client and API at the same time, open two separate instances of VS Code. 
+1. In one instance, open the `./app` folder. In the second instance, open the `./api` folder. 
+1. In the integrated terminal for each instance, start the development server:
+    ```bash
+    npm start
+    ```
+
 
 ## Verify installation
 
