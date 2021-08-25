@@ -4,31 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-api": "cd api & func host start",
-    "start-app": "cd app & npm start",
+    "start-api": "cd api && npm start",
+    "start-app": "cd app && npm start",
     "start-dev": "concurrently \"npm:start-api\" \"npm:start-app\" ",
-    "swa-up": "swa start http://localhost:3000 --api http://localhost:7071",
-    "start": " npm run start-dev &  npm run swa-up ",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-swa": "swa start http://localhost:3000 --api http://localhost:7071",
+    "start": " npm run start-dev && npm run swa-up"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/diberry/temp.git"
+    "url": "git+https://github.com/diberry/swa-1.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/diberry/temp/issues"
+    "url": "https://github.com/diberry/swa-1/issues"
   },
-  "homepage": "https://github.com/diberry/temp#readme",
-  "dependencies": {
-    "@azure/static-web-apps-cli": "^0.6.1"
-  },
+  "homepage": "https://github.com/diberry/swa-1#readme",
   "devDependencies": {
-    "@types/react-dom": "^17.0.9",
     "azure-functions-core-tools": "^3.0.3568",
-    "concurrently": "^6.2.1",
-    "web-vitals": "^2.1.0"
+    "concurrently": "^6.2.1"
   }
 }
