@@ -12,11 +12,13 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    console.log('useEffect');
     getUserInfo();
   }, []);
 
   async function getUserInfo() {
     try {
+        console.log('getUserInfo');
         const response = await fetch('/.auth/me');
         const payload = await response.json();
         const { clientPrincipal } = payload;
@@ -24,8 +26,7 @@ function App() {
         if(clientPrincipal) userHasAuthenticated(true);
         console.log(`clientPrincipal = ${JSON.stringify(clientPrincipal)}`);
     } catch (error) {
-        console.error('No profile could be found');
-        return undefined;
+        console.error('No profile could be found ' + error.message);
     }
 };  
 
@@ -33,7 +34,7 @@ function App() {
     <div className="App">
       <NavBar user={user}/>
       <main className="column">
-        { isAuthenticated ? <PrivateHome /> : <PublicHome /> }
+        { isAuthenticated ? <PrivateHome user={user}/> : <PublicHome /> }
       </main>
     </div>
   )

@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import logo from '../logo.svg';
 
-function PrivateHome() {
+function PrivateHome({user}) {
+
     const [name, setName] = React.useState('');
     const [message, setMessage] = React.useState('');
+
+    useEffect(() => {
+        if(user && user?.userDetails){
+            setName(user?.userDetails);  
+        }
+      }, [user]);
 
     const getDataFromApi = async (e: any) => {
         e.preventDefault();
