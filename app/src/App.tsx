@@ -1,6 +1,5 @@
-import { Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Custom components
 import NavBar from './components/NavBar';
@@ -9,18 +8,32 @@ import PrivateHome from './components/PrivateHome';
 
 function App() {
 
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  async function getUserInfo() {
+    try {
+        const response = await fetch('/.auth/me');
+        const payload = await response.json();
+        const { clientPrincipal } = payload;
+        setUser(clientPrincipal);
+        if(clientPrincipal) userHasAuthenticated(true);
+        console.log(`clientPrincipal = ${JSON.stringify(clientPrincipal)}`);
+    } catch (error) {
+        console.error('No profile could be found');
+        return undefined;
+    }
+};  
+
   return (
     <div className="App">
-      <NavBar />
+      <NavBar user={user}/>
       <main className="column">
-        <Router>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-              <Route exact path="/" component={PublicHome} />
-              <Route exact path="/private" component={PrivateHome} />
-            </Switch>
-          </Suspense>
-        </Router>
+        { isAuthenticated ? <PrivateHome /> : <PublicHome /> }
       </main>
     </div>
   )
