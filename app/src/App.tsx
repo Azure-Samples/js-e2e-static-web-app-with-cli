@@ -25,8 +25,8 @@ function App() {
         setUser(clientPrincipal);
         if(clientPrincipal) userHasAuthenticated(true);
         console.log(`clientPrincipal = ${JSON.stringify(clientPrincipal)}`);
-    } catch (error) {
-        console.error('No profile could be found ' + error?.message.toString());
+    } catch (error:any) {
+        console.error('No profile could be found ' + error?.message?.toString());
     }
 };  
 
