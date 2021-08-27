@@ -1,0 +1,16 @@
+{
+    "routes": [
+        {
+            "route": "/.auth/login/github",
+            "statusCode": "404"
+        },
+        {
+            "route": "/private",
+            "allowedRoles": ["authenticated"]
+        },
+        {
+            "route": "/api/*",
+            "allowedRoles": ["authenticated"]
+        }
+    ]
+}
