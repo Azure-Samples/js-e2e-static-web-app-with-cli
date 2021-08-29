@@ -4,17 +4,24 @@
       "authLevel": "Anonymous",
       "type": "httpTrigger",
       "direction": "in",
+      "dataType": "binary",
       "name": "req",
       "methods": [
-        "get",
         "post"
       ]
     },
     {
       "type": "http",
       "direction": "out",
-      "name": "res"
-    }
+      "name": "$return"
+    },
+    {
+      "name": "storage",
+      "type": "blob",
+      "path": "images/{filename}",
+      "direction": "out",
+      "connection": "AzureWebJobsStorage"
+  }
   ],
   "scriptFile": "../dist/upload/index.js"
 }
