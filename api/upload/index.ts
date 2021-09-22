@@ -3,7 +3,7 @@ import HTTP_CODES from "http-status-enum";
 import * as multipart from "parse-multipart";
 
 /*
-Task: accept file, as multipart form request, send file to Azure Storage.
+Task: accept file, as multipart form request, send file (100MB max on Consumption plan) to Azure Storage.
 
 Run the curl command in the same directory as the file:
 
