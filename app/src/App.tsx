@@ -7,9 +7,9 @@ function App() {
   const [name, setName] = React.useState('');
   const [message, setMessage] = React.useState('');
 
-  const getDataFromApi = async(e: any)=>{
+  const getDataFromApi = async (e: any) => {
     e.preventDefault();
-    const data = await fetch(`/api/hello?name=${name}`);
+    const data = await fetch(`http://localhost:7071/api/hello?name=${name}`);
     const json = await data.json();
 
     if (json.message){
@@ -26,13 +26,13 @@ function App() {
         </p>
         <form id="form1" className="App-form" onSubmit={e => getDataFromApi(e)}>
           <div>
-            <input 
-              type="text" 
-              id="name" 
-              className="App-input" 
-              placeholder="Name" 
-              value={name} 
-              onChange={e=>setName(e.target.value)} />
+            <input
+              type="text"
+              id="name"
+              className="App-input"
+              placeholder="Name"
+              value={name}
+              onChange={e => setName(e.target.value)} />
             <button type="submit" className="App-button">Submit</button>
           </div>
         </form>
