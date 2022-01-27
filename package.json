@@ -4,6 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+      "postinstall-api": "cd api && npm install",
+      "postinstall-app": "cd app && npm install",
+      "postinstall": "concurrently \"npm:postinstall-api\" \"npm:postinstall-app\" ",      
       "start-api": "cd api && npm start",
       "start-app": "cd app && npm start",
       "start-dev": "concurrently \"npm:start-api\" \"npm:start-app\" ",
