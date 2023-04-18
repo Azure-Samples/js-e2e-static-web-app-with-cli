@@ -38,8 +38,8 @@ Install the following:
 1. Replace the current `package.json` file's `scripts` section with the following script entries:
 
     ```bash
-    "start-api": "cd api & npm start",
-    "start-app": "cd app & npm start",
+    "start-api": "cd api && npm start",
+    "start-app": "cd app && npm start",
     "start-dev": "concurrently \"npm:start-api\" \"npm:start-app\" ",
     "start-swa": "swa start http://localhost:3000 --api http://localhost:7071",
     "start": " npm run start-dev && npm run swa-up"
