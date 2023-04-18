@@ -1,0 +1,25 @@
+{
+  "name": "swaplusapi",
+  "version": "1.0.0",
+  "description": "For a complete tutorial, please use the [Microsoft Documentation tutorial found here](https://docs.microsoft.com/azure/developer/javascript/how-to/with-web-app/static-web-app-with-swa-cli/introduction).",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf ./app/dist && rm -rf ./api/dist",
+    "build": "swa build",
+    "start": "swa start",
+    "info": "swa --print-config"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diberry/temp-swa-api-cli.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diberry/temp-swa-api-cli/issues"
+  },
+  "homepage": "https://github.com/diberry/temp-swa-api-cli#readme",
+  "dependencies": {
+    "@azure/static-web-apps-cli": "^1.1.1"
+  }
+}

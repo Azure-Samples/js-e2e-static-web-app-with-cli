@@ -1,0 +1,68 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "func",
+      "label": "func: host start",
+      "command": "host start",
+      "problemMatcher": "$func-node-watch",
+      "isBackground": true,
+      "dependsOn": "npm build (functions)",
+      "options": {
+        "cwd": "${workspaceFolder}/js-e2e-static-web-app-with-cli/api"
+      }
+    },
+    {
+      "type": "shell",
+      "label": "npm build (functions)",
+      "command": "npm run build",
+      "dependsOn": "npm install (functions)",
+      "problemMatcher": "$tsc",
+      "options": {
+        "cwd": "${workspaceFolder}/js-e2e-static-web-app-with-cli/api"
+      }
+    },
+    {
+      "type": "shell",
+      "label": "npm install (functions)",
+      "command": "npm install",
+      "options": {
+        "cwd": "${workspaceFolder}/js-e2e-static-web-app-with-cli/api"
+      }
+    },
+    {
+      "type": "shell",
+      "label": "npm prune (functions)",
+      "command": "npm prune --production",
+      "dependsOn": "npm build (functions)",
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/js-e2e-static-web-app-with-cli/api"
+      }
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "app/",
+      "label": "npm: start",
+      "detail": "react-scripts start",
+      "isBackground": true
+  },
+  {
+      "type": "npm",
+      "script": "start",
+      "path": "api/",
+      "label": "npm: start - api",
+      "detail": "npm-run-all --parallel start:host watch",
+      "isBackground": true
+  },
+  {
+      "type": "shell",
+      "command": "swa start http://localhost:3000 --api http://localhost:7071",
+      "dependsOn": ["npm: start", "npm: start - api"],
+      "label": "swa start",
+      "problemMatcher": [],
+      "dependsOrder": "parallel"
+  }
+  ]
+}
