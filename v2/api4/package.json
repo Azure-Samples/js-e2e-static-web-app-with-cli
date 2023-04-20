@@ -1,8 +1,7 @@
 {
-  "name": "funcv4node",
+  "name": "api4",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/src/functions/*.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -17,5 +16,6 @@
   "devDependencies": {
     "@types/node": "^18.x",
     "typescript": "^4.0.0"
-  }
+  },
+  "main": "dist/src/functions/*.js"
 }

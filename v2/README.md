@@ -45,3 +45,4 @@ This sample is meant to be run from either your host machine or a host machine r
   ```
   http://localhost:4280
   ```
+# func init --model v4 --language typescript --worker-runtime node --source-control

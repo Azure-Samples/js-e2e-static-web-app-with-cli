@@ -3,18 +3,16 @@
 {
 	"name": "Node.js & TypeScript",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:0-18"
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	"features": {
-		"azure-cli": "latest"
-	},
+	// "features": {},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [3000,7071,4280],
+	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "npm install -g azure-functions-core-tools@4 @azure/static-web-apps-cli"
+	// "postCreateCommand": "yarn install",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
