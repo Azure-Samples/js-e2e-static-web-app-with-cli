@@ -1,18 +1,22 @@
 import { app, HttpRequest, HttpResponseInit, InvocationContext } from "@azure/functions";
-// import mongoose from 'mongoose';
-// import { IUser, User, isUser } from "../models/user"; 
+//import mongoose from 'mongoose';
+//import { IUser, User, isUser } from "../models/user"; 
 
-// mongoose.connect(process.env.MONGODB_CONNECTIONSTRING);
+//mongoose.connect(process.env.MONGODB_CONNECTIONSTRING);
 
+app.get('users', {
+  authLevel: 'anonymous',
+  handler: async (request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> => {
 
-// app.get('users', {
-//   authLevel: 'anonymous',
-//   handler: async (request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> => {
-
-//     console.log("get all users")
-//     return { jsonBody: await User.find() };
-//   }
-// })
+    console.log("get all users")
+    //return { jsonBody: await User.find() };
+    return {
+      jsonBody: { 
+        user: null
+      }
+    }
+  }
+})
 /*
 curl --location 'http://localhost:7071/api/users' \
 --header 'Content-Type: application/json' \
