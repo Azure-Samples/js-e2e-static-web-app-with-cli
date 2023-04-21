@@ -1,16 +1,20 @@
 {
-  "name": "funcv4node",
+  "name": "api4",
   "version": "1.0.0",
   "description": "",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "prestart": "npm run build",
-    "start": "func start",
-    "test": "echo \"No tests yet...\""
+    "prestart": "rm -rf dist && npm run build",
+    "start": "func start --verbose",
+    "test": "echo \"No tests yet...\"",
+    "tools": "npm install azure-functions-core-tools@4.0.5095 --save-exact --unsafe-perm true"
   },
   "dependencies": {
-    "@azure/functions": "^4.0.0-alpha.7"
+    "@azure/functions": "4.0.0-alpha.9",
+    "azure-functions-core-tools": "4.0.5095",
+    "mongodb": "^5.3.0",
+    "mongoose": "^7.0.4"
   },
   "devDependencies": {
     "@types/node": "^18.x",
