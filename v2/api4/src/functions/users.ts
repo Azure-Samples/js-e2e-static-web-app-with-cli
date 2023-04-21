@@ -1,90 +1,40 @@
+// @ts-nocheck
+
 import { app, HttpRequest, HttpResponseInit, InvocationContext } from "@azure/functions";
+// import { MongoClient } from 'mongodb';
 
-import mongoose from 'mongoose';
-let dbInstance;
+const users = ["Jane Doe"];
 
-export const getDB = async () =>{
-    if (!dbInstance) {
-        dbInstance = await mongoose.connect(process.env.MONGODB_CONNECTIONSTRING as string);
-    }
-    return dbInstance;
-};
-import { IUser, User, isUser } from "../models/user"; 
-// app.post('create-user', {
-//   route: "users",
-//   authLevel: 'anonymous',
-//   handler: async (request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> => {
-
-//     console.log("create user")
-
-//     // const user = await request.json();
-
-//     // if (isUser(user)) {
-//     //   console.log(`user ${JSON.stringify(user)}`)
-//     await getDb();
-//     //   const newUser = new User(user);
-//     //   await newUser.save();
-
-//     //   return {
-//     //     jsonBody: await User.find(),
-//     //   }
-//     // }
-
-//     return { status: 400, jsonBody: { message: "Invalid user" } };
-//   }
-// })
 app.get('get-all-users', {
   route: "users",
   authLevel: 'anonymous',
   handler: async (request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> => {
 
     console.log("get all users")
-    await getDB();
-    return { jsonBody: await User.find() };
+    return { jsonBody: users }
   }
 })
-/*
-curl --location 'http://localhost:7071/api/users' \
---header 'Content-Type: application/json' \
---data '{
-    "name": "dina",
-    "age": "21"
-}'
-*/
 
+// curl --location 'http://localhost:7071/api/users?user=mike' \
+// --header 'Content-Type: application/json' \
+// --data '{
+//     "name": "dina",
+//     "age": "21"
+// }'
 
-/*
-app.put('users/{id}', {
+app.post('add-user', {
+  route: "users",
   authLevel: 'anonymous',
   handler: async (request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> => {
 
-    const id = request.query.get("id")
-    const user = await request.json();
+    const user = request.query.get('user')
 
-    if (isUser(user)) {
-      await userCRUD.updateUserById(id, user);
+    if (user) {
+      users.push(user)
       return {
-        jsonBody: await userCRUD.getUsers(),
+        jsonBody: user
       }
     }
-
-    return { status: 400, jsonBody: { message: "Invalid user" } };
+    return { status: 404, jsonBody: { error: "user is missing" } }
   }
 })
-*/
-// app.deleteRequest('users/{id}', {
-//   authLevel: 'anonymous',
-//   handler: async (request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> => {
-
-//     // const id = request.query.get("id")
-
-//     // if (id) {
-//     //   await User.findByIdAndDelete(id);
-//     //   return {
-//     //     jsonBody: await User.find(),
-//     //   }
-//     // }
-//     console.log("delete user")
-//     return { status: 400, jsonBody: { message: "Invalid user" } };
-//   }
-// })
