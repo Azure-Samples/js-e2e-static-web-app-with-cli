@@ -1,15 +1,12 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
-export interface IUser {
+export interface IUser extends Document {
   name: string;
   age: number;
 }
 
-// Define the User model
-interface IUserDocument extends IUser, mongoose.Document{}
-
 // Create the User schema
-const userSchema = new mongoose.Schema<IUserDocument>({
+const userSchema = new mongoose.Schema<IUser>({
   name: { type: String, required: true },
   age: { type: Number, required: true },
 });
@@ -18,14 +15,27 @@ export const isUser = (obj: any): obj is IUser => {
   return obj && typeof obj.name === "string" && typeof obj.age === "number";
 };
 
+export const User = mongoose.model<IUser>("User", userSchema);
+
+/*
 // Create the User model
 const UserModel = mongoose.model<IUserDocument>('User', userSchema);
 
+
 class UserCRUD {
 
+
   constructor(private connectionString: string) {
+    this.connectionString = connectionString;
+  }
+  public init(){
+
+    if(!this.connectionString){
+      throw Error("Connection string is empty");
+    }
+
     // Initialize the mongoose connection using the provided connection string
-    mongoose.connect(connectionString);
+    mongoose.connect(this.connectionString);
 
     // Set up event listeners for mongoose connection events (optional)
     mongoose.connection.on('connected', () => {
@@ -69,4 +79,11 @@ class UserCRUD {
   }
 }
 
+export const getUserCrud = () => {
+  const connectionString = process.env.MONGODB_CONNECTIONSTRING;
+  return new UserCRUD(connectionString);
+}
+
+
 export default UserCRUD;
+*/

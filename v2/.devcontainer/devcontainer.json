@@ -14,7 +14,7 @@
 	"forwardPorts": [3000,7071,4280],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "npm install -g azure-functions-core-tools@4 @azure/static-web-apps-cli"
+	"postCreateCommand": "npm install -g @azure/static-web-apps-cli"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
