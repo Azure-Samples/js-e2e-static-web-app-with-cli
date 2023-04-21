@@ -1,41 +1,46 @@
 import { app, HttpRequest, HttpResponseInit, InvocationContext } from "@azure/functions";
-//import mongoose from 'mongoose';
-//import { IUser, User, isUser } from "../models/user"; 
 
-//mongoose.connect(process.env.MONGODB_CONNECTIONSTRING);
-app.post('create-user', {
-  route: "users",
-  authLevel: 'anonymous',
-  handler: async (request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> => {
+import mongoose from 'mongoose';
+let dbInstance;
 
-    console.log("create user")
-    // const user = await request.json();
+export const getDB = async () =>{
+    if (!dbInstance) {
+        dbInstance = await mongoose.connect(process.env.MONGODB_CONNECTIONSTRING as string);
+    }
+    return dbInstance;
+};
+import { IUser, User, isUser } from "../models/user"; 
+// app.post('create-user', {
+//   route: "users",
+//   authLevel: 'anonymous',
+//   handler: async (request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> => {
 
-    // if (isUser(user)) {
-    //   console.log(`user ${JSON.stringify(user)}`)
-    //   const newUser = new User(user);
-    //   await newUser.save();
+//     console.log("create user")
 
-    //   return {
-    //     jsonBody: await User.find(),
-    //   }
-    // }
+//     // const user = await request.json();
 
-    return { status: 400, jsonBody: { message: "Invalid user" } };
-  }
-})
+//     // if (isUser(user)) {
+//     //   console.log(`user ${JSON.stringify(user)}`)
+//     await getDb();
+//     //   const newUser = new User(user);
+//     //   await newUser.save();
+
+//     //   return {
+//     //     jsonBody: await User.find(),
+//     //   }
+//     // }
+
+//     return { status: 400, jsonBody: { message: "Invalid user" } };
+//   }
+// })
 app.get('get-all-users', {
   route: "users",
   authLevel: 'anonymous',
   handler: async (request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> => {
 
     console.log("get all users")
-    //return { jsonBody: await User.find() };
-    return {
-      jsonBody: { 
-        user: null
-      }
-    }
+    await getDB();
+    return { jsonBody: await User.find() };
   }
 })
 /*
