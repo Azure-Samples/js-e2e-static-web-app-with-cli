@@ -3,8 +3,29 @@ import { app, HttpRequest, HttpResponseInit, InvocationContext } from "@azure/fu
 //import { IUser, User, isUser } from "../models/user"; 
 
 //mongoose.connect(process.env.MONGODB_CONNECTIONSTRING);
+app.post('create-user', {
+  route: "users",
+  authLevel: 'anonymous',
+  handler: async (request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> => {
 
-app.get('users', {
+    console.log("create user")
+    // const user = await request.json();
+
+    // if (isUser(user)) {
+    //   console.log(`user ${JSON.stringify(user)}`)
+    //   const newUser = new User(user);
+    //   await newUser.save();
+
+    //   return {
+    //     jsonBody: await User.find(),
+    //   }
+    // }
+
+    return { status: 400, jsonBody: { message: "Invalid user" } };
+  }
+})
+app.get('get-all-users', {
+  route: "users",
   authLevel: 'anonymous',
   handler: async (request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> => {
 
@@ -26,26 +47,7 @@ curl --location 'http://localhost:7071/api/users' \
 }'
 */
 
-// app.post('users', {
-//   authLevel: 'anonymous',
-//   handler: async (request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> => {
 
-//     console.log("create user")
-//     // const user = await request.json();
-
-//     // if (isUser(user)) {
-//     //   console.log(`user ${JSON.stringify(user)}`)
-//     //   const newUser = new User(user);
-//     //   await newUser.save();
-
-//     //   return {
-//     //     jsonBody: await User.find(),
-//     //   }
-//     // }
-
-//     return { status: 400, jsonBody: { message: "Invalid user" } };
-//   }
-// })
 /*
 app.put('users/{id}', {
   authLevel: 'anonymous',
